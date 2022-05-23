@@ -1,5 +1,6 @@
 package com.web.domain;
 
+import com.web.dto.MemberDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -8,6 +9,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
 @Table(name="Member")
 public class Member {
 
@@ -25,12 +27,12 @@ public class Member {
     @Column(name="nickname", nullable = false, length = 15)
     private String nickname; //유저 닉네임
 
-//    public static Member createMember(MemberDto memberDto){
-//        Member member = new Member();
-//        member.setLoginId(memberDto.getLoginId());
-//        member.setLoginPw(loginPw);
-//        member.setNickname(memberDto.getNickName());
-//
-//        return member;
-//    }
+    public static Member createMember(MemberDto memberDto){
+        Member member = new Member();
+        member.setLoginId(memberDto.getLoginId());
+        member.setLoginPw(memberDto.getLoginPw());
+        member.setNickname(memberDto.getNickname());
+
+        return member;
+    }
 }

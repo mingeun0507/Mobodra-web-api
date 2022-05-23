@@ -1,6 +1,7 @@
 package com.web.controller;
 
 import com.web.domain.Member;
+import com.web.dto.MemberDto;
 import com.web.repository.MemberRepository;
 import com.web.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -24,16 +25,25 @@ public class MemberRestController {
     }
 
     @PostMapping(value = "/sign-up")
-    public String createMember(@RequestBody Member member) throws URISyntaxException {
+    public String createMember(@RequestBody MemberDto memberDto) {
         try {
-            Member savedMember = memberService.saveMember(member);
+            memberService.saveMember(memberDto);
             return "true";
         } catch (IllegalStateException e) {
-            System.out.println("asdfasdfasdfasdf");
+            System.out.println(e);
             return "false";
         }
     }
 
-
+    @PostMapping("/login")
+    public String login (@RequestBody MemberDto memberDto) {
+        try {
+            memberService.loginCheck(memberDto);
+            return "true";
+        } catch (IllegalStateException e){
+            System.out.println(e);
+            return "false";
+        }
+    }
 
 }
