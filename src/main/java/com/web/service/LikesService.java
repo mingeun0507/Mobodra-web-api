@@ -34,6 +34,10 @@ public class LikesService {
         return memberRepository.findByLoginId(loginId).getId();
     }
 
+    public List<Likes> getAllByMember(Long memberId) {
+        return likesRepository.findAllByMember(memberRepository.findById(memberId).get());
+    }
+
     public Likes saveLikes(LikesDto likesDto){
         validateDuplicateLikes(likesDto);
         Content content = contentRepository.findById(likesDto.getContentId()).get();

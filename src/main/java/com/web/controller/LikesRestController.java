@@ -35,7 +35,7 @@ public class LikesRestController {
         }
     }
 
-    /* /survey/first로 POST 받았을 때 - 선호도 조사*/
+    /* /survey/first 로 POST 받았을 때 - 선호도 조사*/
     @PostMapping(value = "/survey/first")
     public String createLikesFirst(@RequestBody List<LikesDto> likesDtos, HttpServletRequest req){
         Long memberId = likesService.getMemberId((String) req.getSession().getAttribute("loginId"));
@@ -68,5 +68,20 @@ public class LikesRestController {
             return "false";
         }
 
+    }
+
+    /* /survey/first 로 DELETE 받았을 때 - 선호도 재조사를 위해 삭제*/
+    @DeleteMapping(value = "/survey/first")
+    public String deleteLikesFirst(HttpServletRequest req){
+        Long memberId = likesService.getMemberId((String) req.getSession().getAttribute("loginId"));
+
+        List<Likes> likesList = likesService.getAllByMember(memberId);
+
+        for (Likes likes: likesList) {
+            LikesDto likesDto = new LikesDto(likes.getMember().getId(), likes.getContent().getId());
+            likesService.deleteLikes(likesDto);
+        }
+
+        return "true";
     }
 }
