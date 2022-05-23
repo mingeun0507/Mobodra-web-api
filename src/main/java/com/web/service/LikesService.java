@@ -5,6 +5,7 @@ import com.web.domain.Content;
 import com.web.domain.Likes;
 import com.web.domain.Member;
 import com.web.dto.LikesDto;
+import com.web.dto.MemberDto;
 import com.web.repository.ContentRepository;
 import com.web.repository.LikesRepository;
 import com.web.repository.MemberRepository;
@@ -31,9 +32,13 @@ public class LikesService {
         return likesRepository.findAll();
     }
 
+    public Long getMemberId(String loginId){
+        return memberRepository.findByLoginId(loginId).getId();
+    }
+
     public Likes saveLikes(LikesDto likesDto){
         validateDuplicateLikes(likesDto);
-        Content content = contentRepository.findById(likesDto.getMemberId()).get();
+        Content content = contentRepository.findById(likesDto.getContentId()).get();
         Member member = memberRepository.findById(likesDto.getMemberId()).get();
         return likesRepository.save(Likes.createLikes(content, member));
     }
