@@ -5,6 +5,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -12,14 +13,15 @@ import java.util.List;
 public class LoginInterceptor implements HandlerInterceptor {
 
     public List loginEssential
-            = Arrays.asList("/main");
+            = Arrays.asList("/members/main");
 
     public List loginInessential
             = Arrays.asList();
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
         String loginId = (String)request.getSession().getAttribute("loginId");
+        System.out.println(loginId);
 
         if (loginId != null) {return true;}
 
@@ -29,7 +31,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             String dest = (destQuery == null) ? destUri : destUri+"?"+destQuery;
             request.getSession().setAttribute("dest", dest);
 
-//            response.sendRedirect("/members/login");
+            response.sendRedirect("/members/login");
             return false;
         }
     }

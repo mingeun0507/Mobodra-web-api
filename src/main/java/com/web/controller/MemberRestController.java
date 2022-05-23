@@ -2,14 +2,12 @@ package com.web.controller;
 
 import com.web.domain.Member;
 import com.web.dto.MemberDto;
-import com.web.repository.MemberRepository;
 import com.web.service.MemberService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
-import java.net.URISyntaxException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
@@ -30,19 +28,23 @@ public class MemberRestController {
             memberService.saveMember(memberDto);
             return "true";
         } catch (IllegalStateException e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
             return "false";
         }
     }
 
     @PostMapping("/login")
-    public String login (@RequestBody MemberDto memberDto) {
+    public String login (@RequestBody MemberDto memberDto, HttpServletRequest req) {
+        HttpSession session = req.getSession();
+
         try {
             memberService.loginCheck(memberDto);
+            session.setAttribute("loginId", memberDto.getLoginId());
             return "true";
         } catch (IllegalStateException e){
-            System.out.println(e);
-            return "false";
+            session.setAttribute("loginId", null);
+            System.out.println(e.getMessage());
+            return "redirect:/members/login";
         }
     }
 

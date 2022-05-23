@@ -36,16 +36,14 @@ public class MemberService {
     public void loginCheck(MemberDto memberDto){
 
          Member foundMemberByLoginId = memberRepository.findByLoginId(memberDto.getLoginId());
-
-        if (foundMemberByLoginId == null) {
-            throw new IllegalStateException("존재하지 않는 아이디나 비밀번호이거나 아이디와 비밀번호가 일치하지 않습니다.1");
-        }
+         if (foundMemberByLoginId == null) {
+             throw new IllegalStateException("존재하지 않는 아이디나 비밀번호이거나 아이디와 비밀번호가 일치하지 않습니다.1");
+         }
 
          if (!foundMemberByLoginId.getLoginPw().equals(memberDto.getLoginPw())) {
              throw new IllegalStateException("존재하지 않는 아이디나 비밀번호이거나 아이디와 비밀번호가 일치하지 않습니다.");
          }
 
     }
-
 
 }
