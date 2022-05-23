@@ -13,10 +13,10 @@ import java.util.List;
 public class LoginInterceptor implements HandlerInterceptor {
 
     public List loginEssential
-            = Arrays.asList("/likes/survey");
+            = Arrays.asList("");
 
     public List loginInessential
-            = Arrays.asList("/members/sign-up", "members/login");
+            = Arrays.asList("/members/sign-up", "members/login", "/likes/survey");
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {

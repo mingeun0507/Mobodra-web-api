@@ -1,5 +1,6 @@
 package com.web.domain;
 
+import com.web.dto.LikesDto;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -25,4 +26,13 @@ public class Likes {
     @OneToOne
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
+
+    public static Likes createLikes(Content content, Member member){
+        Likes likes = new Likes();
+
+        likes.setContent(content);
+        likes.setMember(member);
+
+        return likes;
+    }
 }

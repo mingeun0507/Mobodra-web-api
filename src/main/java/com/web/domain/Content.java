@@ -18,8 +18,7 @@ public class Content {
     private Long id;
 
     @Column(name = "type")
-    @Enumerated(EnumType.STRING)
-    private ContentType type;
+    private String type;
 
     @Column(name = "title")
     private String title;
