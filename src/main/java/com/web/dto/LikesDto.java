@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LikesDto {
-    private Long contentId;
-
     private Long memberId;
+
+    private Long contentId;
 }

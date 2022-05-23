@@ -20,18 +20,18 @@ public class Likes {
     private Long id;
 
     @OneToOne
-    @JoinColumn(name = "CONTENT_ID")
-    private Content content;
-
-    @OneToOne
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
+
+    @OneToOne
+    @JoinColumn(name = "CONTENT_ID")
+    private Content content;
 
     public static Likes createLikes(Content content, Member member){
         Likes likes = new Likes();
 
-        likes.setContent(content);
         likes.setMember(member);
+        likes.setContent(content);
 
         return likes;
     }

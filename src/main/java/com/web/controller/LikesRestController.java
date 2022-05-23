@@ -4,11 +4,9 @@ import com.web.domain.Likes;
 import com.web.dto.LikesDto;
 import com.web.service.LikesService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @RestController
@@ -37,6 +35,26 @@ public class LikesRestController {
         }
     }
 
+    /* /survey/first로 POST 받았을 때 - 선호도 조사*/
+    @PostMapping(value = "/survey/first")
+    public String createLikesFirst(@RequestBody List<LikesDto> likesDtos, HttpServletRequest req){
+        Long memberId = likesService.getMemberId((String) req.getSession().getAttribute("loginId"));
+
+        for (LikesDto likesDto: likesDtos) {
+            likesDto.setMemberId(memberId);
+
+            try {
+                likesService.saveLikes(likesDto);
+            } catch (IllegalStateException e) {
+                System.out.println(e.getMessage());
+                return "false";
+            }
+
+        }
+
+        return "true";
+    }
+
     @DeleteMapping(value = "/survey")
     public String deleteLikes(@RequestBody LikesDto likesDto, HttpServletRequest req){
 
@@ -49,5 +67,6 @@ public class LikesRestController {
             System.out.println(e.getMessage());
             return "false";
         }
+
     }
 }
