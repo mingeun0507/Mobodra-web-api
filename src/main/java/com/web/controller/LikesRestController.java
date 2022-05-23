@@ -36,4 +36,18 @@ public class LikesRestController {
             return "false";
         }
     }
+
+    @DeleteMapping(value = "/survey")
+    public String deleteLikes(@RequestBody LikesDto likesDto, HttpServletRequest req){
+
+        likesDto.setMemberId(likesService.getMemberId((String) req.getSession().getAttribute("loginId")));
+
+        try {
+            likesService.deleteLikes(likesDto);
+            return "true";
+        } catch (IllegalStateException e){
+            System.out.println(e.getMessage());
+            return "false";
+        }
+    }
 }

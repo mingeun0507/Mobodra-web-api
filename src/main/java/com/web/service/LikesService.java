@@ -1,11 +1,9 @@
 package com.web.service;
 
-import com.web.controller.LikesRestController;
 import com.web.domain.Content;
 import com.web.domain.Likes;
 import com.web.domain.Member;
 import com.web.dto.LikesDto;
-import com.web.dto.MemberDto;
 import com.web.repository.ContentRepository;
 import com.web.repository.LikesRepository;
 import com.web.repository.MemberRepository;
@@ -53,5 +51,21 @@ public class LikesService {
         }
     }
 
+    public void deleteLikes(LikesDto likesDto){
+        List<Likes> foundLikesByMember = likesRepository.findAllByMember(memberRepository.findById(likesDto.getMemberId()).get());
+        Likes foundLikes = null;
+
+        for (Likes likes: foundLikesByMember){
+            if (likes.getContent().getId() == likesDto.getContentId()){
+                foundLikes = likes;
+            }
+        }
+
+        if (foundLikes == null) {
+            throw new IllegalStateException("등록되지 않은 작품입니다.");
+        } else {
+            likesRepository.delete(foundLikes);
+        }
+    }
 
 }
