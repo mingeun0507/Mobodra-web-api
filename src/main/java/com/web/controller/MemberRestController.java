@@ -44,7 +44,7 @@ public class MemberRestController {
         } catch (IllegalStateException e){
             session.setAttribute("loginId", null);
             System.out.println(e.getMessage());
-            return "redirect:/members/login";
+            return "false";
         }
     }
 

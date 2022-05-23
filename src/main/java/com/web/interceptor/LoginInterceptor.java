@@ -13,15 +13,14 @@ import java.util.List;
 public class LoginInterceptor implements HandlerInterceptor {
 
     public List loginEssential
-            = Arrays.asList("/members/main");
+            = Arrays.asList("/likes/survey");
 
     public List loginInessential
-            = Arrays.asList();
+            = Arrays.asList("/members/sign-up", "members/login");
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
         String loginId = (String)request.getSession().getAttribute("loginId");
-        System.out.println(loginId);
 
         if (loginId != null) {return true;}
 
