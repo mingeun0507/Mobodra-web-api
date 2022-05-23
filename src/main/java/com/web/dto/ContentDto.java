@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ContentDto {
-    private ContentType contentType;
+    private String contentType;
 
     private String title;
 

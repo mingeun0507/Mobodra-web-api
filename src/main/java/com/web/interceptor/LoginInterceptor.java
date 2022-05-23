@@ -13,7 +13,7 @@ import java.util.List;
 public class LoginInterceptor implements HandlerInterceptor {
 
     public List loginEssential
-            = Arrays.asList("/likes/**");
+            = Arrays.asList("/**");
 
     public List loginInessential
             = Arrays.asList("/members/sign-up", "members/login");
