@@ -12,10 +12,10 @@ import java.util.List;
 @Component
 public class LoginInterceptor implements HandlerInterceptor {
 
-    public List loginEssential
-            = Arrays.asList("/members/**", "/likes/**", "/main/**");
+    public List<String> loginEssential
+            = Arrays.asList("/likes/survey/**", "/main");
 
-    public List loginInessential
+    public List<String> loginInessential
             = Arrays.asList("/members/sign-up", "members/login");
 
     @Override
