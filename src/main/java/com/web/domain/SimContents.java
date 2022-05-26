@@ -19,49 +19,49 @@ public class SimContents {
     private Long id;
 
     @Column(name = "sim1")
-    private String sim1;
+    private int sim1;
 
     @Column(name = "sim2")
-    private String sim2;
+    private int sim2;
 
     @Column(name = "sim3")
-    private String sim3;
+    private int sim3;
 
     @Column(name = "sim4")
-    private String sim4;
+    private int sim4;
 
     @Column(name = "sim5")
-    private String sim5;
+    private int sim5;
 
     @Column(name = "sim6")
-    private String sim6;
+    private int sim6;
 
     @Column(name = "sim7")
-    private String sim7;
+    private int sim7;
 
     @Column(name = "sim8")
-    private String sim8;
+    private int sim8;
 
     @Column(name = "sim9")
-    private String sim9;
+    private int sim9;
 
     @Column(name = "sim10")
-    private String sim10;
+    private int sim10;
 
     @Column(name = "sim11")
-    private String sim11;
+    private int sim11;
 
     @Column(name = "sim12")
-    private String sim13;
+    private int sim13;
 
     @Column(name = "sim14")
-    private String sim14;
+    private int sim14;
 
     @Column(name = "sim15")
-    private String sim15;
+    private int sim15;
 
     @Column(name = "sim16")
-    private String sim16;
+    private int sim16;
 
 
 
