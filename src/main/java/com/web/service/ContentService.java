@@ -19,14 +19,18 @@ import java.util.*;
 @RequiredArgsConstructor
 public class ContentService {
 
-    @Autowired
     private ContentRepository contentRepository;
 
-    @Autowired
     private SimContentsRepository simContentsRepository;
 
-    @Autowired
     private LikesRepository likesRepository;
+
+    @Autowired
+    public ContentService(ContentRepository contentRepository, SimContentsRepository simContentsRepository, LikesRepository likesRepository) {
+        this.contentRepository = contentRepository;
+        this.simContentsRepository = simContentsRepository;
+        this.likesRepository = likesRepository;
+    }
 
     public List<ContentDto> getContents() {
         List<Content> contentList = contentRepository.findAll();

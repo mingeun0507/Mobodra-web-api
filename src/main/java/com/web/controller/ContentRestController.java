@@ -20,14 +20,18 @@ import java.util.List;
 @RequiredArgsConstructor
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ContentRestController {
-    @Autowired
     private ContentService contentService;
 
-    @Autowired
     private LikesService likesService;
 
-    @Autowired
     private MemberService memberService;
+
+    @Autowired
+    public ContentRestController(ContentService contentService, LikesService likesService, MemberService memberService) {
+        this.contentService = contentService;
+        this.likesService = likesService;
+        this.memberService = memberService;
+    }
 
     @GetMapping
     public List<ContentDto> getUserSimContents(HttpServletRequest req) {

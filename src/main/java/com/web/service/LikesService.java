@@ -18,13 +18,18 @@ import java.util.List;
 @Transactional
 @RequiredArgsConstructor
 public class LikesService {
-    private final LikesRepository likesRepository;
+    private LikesRepository likesRepository;
 
-    @Autowired
     private ContentRepository contentRepository;
 
-    @Autowired
     private MemberRepository memberRepository;
+
+    @Autowired
+    public LikesService(LikesRepository likesRepository, ContentRepository contentRepository, MemberRepository memberRepository) {
+        this.likesRepository = likesRepository;
+        this.contentRepository = contentRepository;
+        this.memberRepository = memberRepository;
+    }
 
     public List<Likes> getAllLikes(){
         return likesRepository.findAll();
