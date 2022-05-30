@@ -12,6 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/likes")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class LikesRestController {
 
     private final LikesService likesService;
