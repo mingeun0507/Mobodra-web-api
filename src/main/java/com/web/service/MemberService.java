@@ -22,6 +22,10 @@ public class MemberService {
         return memberRepository.findAll();
     }
 
+    public Member getMemberByLoginId(String loginId) {
+        return memberRepository.findByLoginId(loginId);
+    }
+
     public Member saveMember(MemberDto memberDto){
         validateDuplicateMember(memberDto);
         return memberRepository.save(Member.createMember(memberDto));
