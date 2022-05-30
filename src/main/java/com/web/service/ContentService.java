@@ -83,12 +83,8 @@ public class ContentService {
             }
         }
 
-        System.out.println(SimIdMap);
-
         List<Map.Entry<Long, Long>> entryList = new LinkedList<>(SimIdMap.entrySet());
         entryList.sort((o1, o2) -> (int) (o2.getValue() - o1.getValue()));
-
-        System.out.println(entryList);
 
         List<ContentDto> contentDtoList = new ArrayList<>();
 
@@ -98,10 +94,6 @@ public class ContentService {
             contentDto.setTitle(contentRepository.findById(entry.getKey()).get().getTitle());
             contentDto.setYear(contentRepository.findById(entry.getKey()).get().getYear());
             contentDtoList.add(contentDto);
-
-            if (contentDtoList.size() >= 24){
-                break;
-            }
         }
 
         return contentDtoList;
