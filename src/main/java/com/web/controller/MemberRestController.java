@@ -48,4 +48,9 @@ public class MemberRestController {
         }
     }
 
+    @GetMapping("/error")
+    public String error(){
+        return "로그인을 해주세요.";
+    }
+
 }

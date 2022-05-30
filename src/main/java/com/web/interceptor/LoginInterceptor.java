@@ -16,7 +16,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             = Arrays.asList("/likes/survey/**", "/main");
 
     public List<String> loginInessential
-            = Arrays.asList("/members/sign-up", "members/login");
+            = Arrays.asList("/members/sign-up", "members/login", "members/error");
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
@@ -30,7 +30,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             String dest = (destQuery == null) ? destUri : destUri+"?"+destQuery;
             request.getSession().setAttribute("dest", dest);
 
-            response.sendRedirect("/members/login");
+            response.sendRedirect("/members/error");
             return false;
         }
     }
