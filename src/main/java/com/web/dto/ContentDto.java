@@ -16,4 +16,6 @@ public class ContentDto {
     private String title;
 
     private String year;
+
+    private String link;
 }

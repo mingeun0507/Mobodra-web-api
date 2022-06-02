@@ -26,4 +26,6 @@ public class Content {
     @Column(name = "year")
     private String year;
 
+    @Column(name = "image_link")
+    private String imageLink;
 }

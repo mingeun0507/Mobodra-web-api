@@ -37,7 +37,7 @@ public class ContentService {
         List<ContentDto> contentDtoList = new ArrayList<>();
 
         for (Content content: contentList){
-            ContentDto contentDto = new ContentDto(content.getType(), content.getTitle(), content.getYear());
+            ContentDto contentDto = new ContentDto(content.getType(), content.getTitle(), content.getYear(), content.getImageLink());
             contentDtoList.add(contentDto);
         }
 
