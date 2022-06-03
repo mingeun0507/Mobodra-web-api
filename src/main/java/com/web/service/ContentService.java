@@ -97,6 +97,7 @@ public class ContentService {
             contentDto.setContentType(contentRepository.findById(entry.getKey()).get().getType());
             contentDto.setTitle(contentRepository.findById(entry.getKey()).get().getTitle());
             contentDto.setYear(contentRepository.findById(entry.getKey()).get().getYear());
+            contentDto.setImageLink(contentRepository.findById(entry.getKey()).get().getImageLink());
             contentDtoList.add(contentDto);
         }
 
