@@ -24,11 +24,15 @@ public class MemberRestController {
     }
 
     @PostMapping(value = "/sign-up")
-    public String createMember(@RequestBody MemberDto memberDto) {
+    public String createMember(@RequestBody MemberDto memberDto, HttpServletRequest req) {
+        HttpSession session = req.getSession();
+
         try {
             memberService.saveMember(memberDto);
+            session.setAttribute("loginId", memberDto.getLoginId());
             return "true";
         } catch (IllegalStateException e) {
+            session.setAttribute("loginId", null);
             System.out.println(e.getMessage());
             return "false";
         }
