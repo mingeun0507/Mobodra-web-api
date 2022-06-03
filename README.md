@@ -17,12 +17,14 @@ Mobodra의 웹 API입니다.
     {
         "contentType": "book",
         "title": "Breaking Dawn (The Twilight Saga, Book 4)",
-        "year": "2008"
+        "year": "2008",
+        "imageLink": "https://bookthumb-phinf.pstatic.net/cover/047/134/04713402.jpg?type=m1&udate=20090128"
     },
     {
         "contentType": "movie",
         "title": "Titanic",
-        "year": "1997"
+        "year": "1997",
+        "imageLink": "https://ssl.pstatic.net/imgmovie/mdi/mit110/0188/18847_P96_094922.jpg"
     }
 ]
 ```
