@@ -6,6 +6,7 @@ import com.web.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -23,30 +24,24 @@ public class MemberRestController {
     }
 
     @PostMapping(value = "/sign-up")
-    public String createMember(@RequestBody MemberDto memberDto, HttpServletRequest req) {
-        HttpSession session = req.getSession();
+    public String createMember(@RequestBody MemberDto memberDto) {
 
         try {
             memberService.saveMember(memberDto);
-            session.setAttribute("loginId", memberDto.getLoginId());
-            return session.getId();
+            return memberDto.getLoginId();
         } catch (IllegalStateException e) {
-            session.setAttribute("loginId", null);
             System.out.println(e.getMessage());
             return "false";
         }
     }
 
-    @PostMapping("/login")
-    public String login (@RequestBody MemberDto memberDto, HttpServletRequest req) {
-        HttpSession session = req.getSession();
+    @PostMapping(value = "/login")
+    public String login (@RequestBody MemberDto memberDto) {
 
         try {
             memberService.loginCheck(memberDto);
-            session.setAttribute("loginId", memberDto.getLoginId());
-            return session.getId();
+            return memberDto.getLoginId();
         } catch (IllegalStateException e){
-            session.setAttribute("loginId", null);
             System.out.println(e.getMessage());
             return "false";
         }

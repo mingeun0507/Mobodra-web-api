@@ -6,6 +6,7 @@ import com.web.service.LikesService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
@@ -21,10 +22,10 @@ public class LikesRestController {
         return likesService.getAllLikes();
     }
 
-    @PostMapping(value = "/survey")
-    public String createLikes(@RequestBody LikesDto likesDto, HttpServletRequest req){
+    @PostMapping(value = "/survey", headers = "loginId")
+    public String createLikes(@RequestBody LikesDto likesDto, @RequestHeader String loginId){
 
-        likesDto.setMemberId(likesService.getMemberId((String) req.getSession().getAttribute("loginId")));
+        likesDto.setMemberId(likesService.getMemberId(loginId));
 
         try {
             likesService.saveLikes(likesDto);
@@ -36,10 +37,10 @@ public class LikesRestController {
     }
 
     /* /survey/first 로 POST 받았을 때 - 선호도 조사*/
-    @PostMapping(value = "/survey/first")
-    public String createLikesFirst(@RequestBody List<LikesDto> likesDtos, HttpServletRequest req){
-        System.out.println(req.getSession());
-        Long memberId = likesService.getMemberId((String) req.getSession().getAttribute("loginId"));
+    @PostMapping(value = "/survey/first", headers = "loginId")
+    public String createLikesFirst(@RequestBody List<LikesDto> likesDtos, @RequestHeader String loginId){
+        Long memberId = likesService.getMemberId(loginId);
+
 
         for (LikesDto likesDto: likesDtos) {
             likesDto.setMemberId(memberId);
@@ -56,10 +57,10 @@ public class LikesRestController {
         return "true";
     }
 
-    @DeleteMapping(value = "/survey")
-    public String deleteLikes(@RequestBody LikesDto likesDto, HttpServletRequest req){
+    @DeleteMapping(value = "/survey", headers = "loginId")
+    public String deleteLikes(@RequestBody LikesDto likesDto, @RequestHeader String loginId){
 
-        likesDto.setMemberId(likesService.getMemberId((String) req.getSession().getAttribute("loginId")));
+        likesDto.setMemberId(likesService.getMemberId(loginId));
 
         try {
             likesService.deleteLikes(likesDto);
@@ -72,9 +73,9 @@ public class LikesRestController {
     }
 
     /* /survey/first 로 DELETE 받았을 때 - 선호도 재조사를 위해 삭제*/
-    @DeleteMapping(value = "/survey/first")
-    public String deleteLikesFirst(HttpServletRequest req){
-        Long memberId = likesService.getMemberId((String) req.getSession().getAttribute("loginId"));
+    @DeleteMapping(value = "/survey/first", headers = "loginId")
+    public String deleteLikesFirst(@RequestHeader String loginId){
+        Long memberId = likesService.getMemberId(loginId);
 
         List<Likes> likesList = likesService.getAllByMember(memberId);
 

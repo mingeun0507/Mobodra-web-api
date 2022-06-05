@@ -78,6 +78,7 @@ public class ContentService {
         Map<Long, Long> SimIdMap = new HashMap<Long, Long>();
         for (int i = 0; i < findSimIdList.size(); i++){
             for (int j = 0; j < 16; j++){
+                System.out.println();
                 if (SimIdMap.containsKey(findSimIdList.get(i)[j])){
                     SimIdMap.replace(findSimIdList.get(i)[j], SimIdMap.get(findSimIdList.get(i)[j]) + 16 - j);
                 }
@@ -94,6 +95,7 @@ public class ContentService {
 
         for (Map.Entry<Long, Long> entry: entryList){
             ContentDto contentDto = new ContentDto();
+            System.out.println(entry.getKey());
             contentDto.setContentType(contentRepository.findById(entry.getKey()).get().getType());
             contentDto.setTitle(contentRepository.findById(entry.getKey()).get().getTitle());
             contentDto.setYear(contentRepository.findById(entry.getKey()).get().getYear());

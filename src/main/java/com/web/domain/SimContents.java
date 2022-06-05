@@ -1,6 +1,7 @@
 package com.web.domain;
 
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
@@ -9,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Data
+@Getter
 @NoArgsConstructor
 @Table(name = "sim_contents")
 public class SimContents {

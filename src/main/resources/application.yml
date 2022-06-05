@@ -23,3 +23,4 @@ server:
         secure: true
         http-only: false
         same-site: none
+        path: /
