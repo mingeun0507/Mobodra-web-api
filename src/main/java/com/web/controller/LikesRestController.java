@@ -12,7 +12,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/likes")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class LikesRestController {
 
     private final LikesService likesService;
@@ -39,6 +38,7 @@ public class LikesRestController {
     /* /survey/first 로 POST 받았을 때 - 선호도 조사*/
     @PostMapping(value = "/survey/first")
     public String createLikesFirst(@RequestBody List<LikesDto> likesDtos, HttpServletRequest req){
+        System.out.println(req.getSession());
         Long memberId = likesService.getMemberId((String) req.getSession().getAttribute("loginId"));
 
         for (LikesDto likesDto: likesDtos) {

@@ -16,3 +16,10 @@ spring:
     livereload:
       enabled: true
   security:
+server:
+  servlet:
+    session:
+      cookie:
+        secure: true
+        http-only: false
+        same-site: none

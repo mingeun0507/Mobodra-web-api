@@ -18,7 +18,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/main")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ContentRestController {
     private ContentService contentService;
 

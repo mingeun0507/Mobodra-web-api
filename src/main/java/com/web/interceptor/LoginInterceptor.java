@@ -13,7 +13,9 @@ import java.util.List;
 public class LoginInterceptor implements HandlerInterceptor {
 
     public List<String> loginEssential
-            = Arrays.asList("/likes/survey/**", "/main");
+//            = Arrays.asList("/likes/survey/**", "/main");
+                = Arrays.asList("");
+
 
     public List<String> loginInessential
             = Arrays.asList("/members/sign-up", "members/login", "members/error");

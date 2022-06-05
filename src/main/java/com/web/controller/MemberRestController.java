@@ -13,7 +13,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/members")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class MemberRestController {
 
     private final MemberService memberService;
@@ -30,7 +29,7 @@ public class MemberRestController {
         try {
             memberService.saveMember(memberDto);
             session.setAttribute("loginId", memberDto.getLoginId());
-            return "true";
+            return session.getId();
         } catch (IllegalStateException e) {
             session.setAttribute("loginId", null);
             System.out.println(e.getMessage());
@@ -45,7 +44,7 @@ public class MemberRestController {
         try {
             memberService.loginCheck(memberDto);
             session.setAttribute("loginId", memberDto.getLoginId());
-            return "true";
+            return session.getId();
         } catch (IllegalStateException e){
             session.setAttribute("loginId", null);
             System.out.println(e.getMessage());
