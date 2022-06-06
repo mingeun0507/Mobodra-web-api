@@ -31,7 +31,6 @@ public class ContentRestController {
 
     @GetMapping(value = "", headers = "loginId")
     public List<ContentDto> getUserSimContents(@RequestHeader String loginId) {
-        System.out.println(loginId);
         List<Likes> likesList = likesService.getAllByMember(memberService.getMemberByLoginId(loginId).getId());
 
         return contentService.get16SimContentsList(contentService.getSimIdList(likesList));
