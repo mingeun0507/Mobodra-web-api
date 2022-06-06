@@ -37,7 +37,7 @@ public class ContentService {
         List<ContentDto> contentDtoList = new ArrayList<>();
 
         for (Content content: contentList){
-            ContentDto contentDto = new ContentDto(content.getType(), content.getTitle(), content.getYear(), content.getImageLink());
+            ContentDto contentDto = new ContentDto(content.getId(), content.getType(), content.getTitle(), content.getYear(), content.getImageLink());
             contentDtoList.add(contentDto);
         }
 
@@ -75,25 +75,38 @@ public class ContentService {
     }
 
     public List<ContentDto> get16SimContentsList(List<Long[]> findSimIdList){
-        Map<Long, Long> SimIdMap = new HashMap<Long, Long>();
+        Map<Long, Long> simIdMap = new HashMap<Long, Long>();
         for (int i = 0; i < findSimIdList.size(); i++){
             for (int j = 0; j < 16; j++){
-                if (SimIdMap.containsKey(findSimIdList.get(i)[j])){
-                    SimIdMap.replace(findSimIdList.get(i)[j], SimIdMap.get(findSimIdList.get(i)[j]) + 16 - j);
+                if (simIdMap.containsKey(findSimIdList.get(i)[j])){
+                    simIdMap.replace(findSimIdList.get(i)[j], simIdMap.get(findSimIdList.get(i)[j]) + 16 - j);
                 }
                 else {
-                    SimIdMap.put(findSimIdList.get(i)[j], (long) (16 - j));
+                    simIdMap.put(findSimIdList.get(i)[j], (long) (16 - j));
                 }
             }
         }
 
-        List<Map.Entry<Long, Long>> entryList = new LinkedList<>(SimIdMap.entrySet());
+        simIdMap.put(1L, (long) (Math.random() * 5 + 1));
+        simIdMap.put(6L, (long) (Math.random() * 5 + 1));
+        simIdMap.put(4L, (long) (Math.random() * 5 + 1));
+        simIdMap.put(10L, (long) (Math.random() * 5 + 1));
+        simIdMap.put(9L, (long) (Math.random() * 5 + 1));
+        simIdMap.put(5L, (long) (Math.random() * 5 + 1));
+        simIdMap.put(8L, (long) (Math.random() * 5 + 1));
+        simIdMap.put(2L, (long) (Math.random() * 5 + 1));
+        simIdMap.put(7L, (long) (Math.random() * 5 + 1));
+        simIdMap.put(3L, (long) (Math.random() * 5 + 1));
+
+
+        List<Map.Entry<Long, Long>> entryList = new LinkedList<>(simIdMap.entrySet());
         entryList.sort((o1, o2) -> (int) (o2.getValue() - o1.getValue()));
 
         List<ContentDto> contentDtoList = new ArrayList<>();
 
         for (Map.Entry<Long, Long> entry: entryList){
             ContentDto contentDto = new ContentDto();
+            contentDto.setId(entry.getKey());
             contentDto.setContentType(contentRepository.findById(entry.getKey()).get().getType());
             contentDto.setTitle(contentRepository.findById(entry.getKey()).get().getTitle());
             contentDto.setYear(contentRepository.findById(entry.getKey()).get().getYear());

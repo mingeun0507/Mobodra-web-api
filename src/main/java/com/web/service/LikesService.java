@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @Transactional
@@ -54,7 +55,7 @@ public class LikesService {
         List<Likes> foundLikes = likesRepository.findAllByMember(memberRepository.findById(likesDto.getMemberId()).get());
 
         for (Likes likes: foundLikes){
-            if (likes.getContent().getId() == likesDto.getContentId()){
+            if (Objects.equals(likes.getContent().getId(), likesDto.getContentId())){
                 throw new IllegalStateException("이미 선호 등록한 작품입니다.");
             }
         }
