@@ -87,16 +87,16 @@ public class ContentService {
             }
         }
 
-        simIdMap.put(1L, (long) (Math.random() * 5 + 1));
-        simIdMap.put(6L, (long) (Math.random() * 5 + 1));
-        simIdMap.put(4L, (long) (Math.random() * 5 + 1));
-        simIdMap.put(10L, (long) (Math.random() * 5 + 1));
-        simIdMap.put(9L, (long) (Math.random() * 5 + 1));
-        simIdMap.put(5L, (long) (Math.random() * 5 + 1));
-        simIdMap.put(8L, (long) (Math.random() * 5 + 1));
-        simIdMap.put(2L, (long) (Math.random() * 5 + 1));
-        simIdMap.put(7L, (long) (Math.random() * 5 + 1));
-        simIdMap.put(3L, (long) (Math.random() * 5 + 1));
+        simIdMap.put(1L, 1L);
+        simIdMap.put(6L, 1L);
+        simIdMap.put(4L, 1L);
+        simIdMap.put(10L, 1L);
+        simIdMap.put(9L, 1L);
+        simIdMap.put(5L, 1L);
+        simIdMap.put(8L, 1L);
+        simIdMap.put(2L, 1L);
+        simIdMap.put(7L, 1L);
+        simIdMap.put(3L, 1L);
 
 
         List<Map.Entry<Long, Long>> entryList = new LinkedList<>(simIdMap.entrySet());
@@ -112,6 +112,30 @@ public class ContentService {
             contentDto.setYear(contentRepository.findById(entry.getKey()).get().getYear());
             contentDto.setImageLink(contentRepository.findById(entry.getKey()).get().getImageLink());
             contentDtoList.add(contentDto);
+        }
+
+        return contentDtoList;
+    }
+
+    public List<ContentDto> getUserLikedList(List<Likes> likesList){
+        List<ContentDto> contentDtoList = new ArrayList<>();
+
+        for (int i = 0; i < 24; i++){
+            int pos = likesList.size() - i - 1;
+
+            if (pos < 0) {
+                break;
+            }
+
+            ContentDto contentDto = new ContentDto();
+            Long contentId = likesList.get(pos).getContent().getId();
+            contentDto.setId(contentId);
+            contentDto.setContentType(contentRepository.findById(contentId).get().getType());
+            contentDto.setTitle(contentRepository.findById(contentId).get().getTitle());
+            contentDto.setYear(contentRepository.findById(contentId).get().getYear());
+            contentDto.setImageLink(contentRepository.findById(contentId).get().getImageLink());
+            contentDtoList.add(contentDto);
+
         }
 
         return contentDtoList;

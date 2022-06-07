@@ -57,7 +57,7 @@ public class LikesRestController {
         return "true";
     }
 
-    @DeleteMapping(value = "/survey", headers = "loginId")
+    @PostMapping(value = "/survey/delete", headers = "loginId")
     public String deleteLikes(@RequestBody LikesDto likesDto, @RequestHeader String loginId){
 
         likesDto.setMemberId(likesService.getMemberId(loginId));
@@ -73,7 +73,7 @@ public class LikesRestController {
     }
 
     /* /survey/first 로 DELETE 받았을 때 - 선호도 재조사를 위해 삭제*/
-    @DeleteMapping(value = "/survey/first", headers = "loginId")
+    @PostMapping(value = "/survey/first/delete", headers = "loginId")
     public String deleteLikesFirst(@RequestHeader String loginId){
         Long memberId = likesService.getMemberId(loginId);
 

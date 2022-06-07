@@ -14,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/members")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class MemberRestController {
 
     private final MemberService memberService;

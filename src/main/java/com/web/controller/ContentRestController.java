@@ -46,4 +46,9 @@ public class ContentRestController {
         return contentService.getContents();
     }
 
+    @GetMapping(value = "/liked", headers = "loginId")
+    public List<ContentDto> getLikedContents(@RequestHeader String loginId){
+        return contentService.getUserLikedList(likesService.getAllByMember(memberService.getMemberByLoginId(loginId).getId()));
+    }
+
 }
