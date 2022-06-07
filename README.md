@@ -6,7 +6,6 @@ Mobodra의 웹 API입니다.
 
 *   [GET](#GET)
 *   [POST](#POST)
-*   [DELETE](#DELETE)
 
 
 ## GET
@@ -60,13 +59,11 @@ Mobodra의 웹 API입니다.
 {"contentId": "1", "memberId": "0"}
 ```
 
-## DELETE
-
-- 선호도 재조사를 위한 좋아요 표시 전체 삭제: /likes/survey/first
+- 선호도 재조사를 위한 좋아요 표시 전체 삭제: /likes/survey/first/delete
 - 성공 시 true, 실패 시 false 리턴
 - json 바디 필요 X
 
-- 좋아요 취소: /likes/survey
+- 좋아요 취소: /likes/survey/delete
 - 성공 시 true, 실패 시 false 리턴
 - memberId는 임의의 값으로 등록해도 무방(세션 ID 받아와서 사용)
 ```
